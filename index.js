@@ -8,7 +8,7 @@ const app1 = express()
 app1.use(express.json())
 
 // mongoose connection to mongodb database
-mongoose.connect("your mongo db uri")
+mongoose.connect("your mongo db url")
 mongoose.connection.once('open', ()=>{
     console.log('connection to the database ready')
 })

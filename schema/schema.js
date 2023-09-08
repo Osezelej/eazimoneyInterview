@@ -21,16 +21,15 @@ const todoType = new GraphQLObjectType({
 })
 
 
-const userType= new GraphQLObjectType({
+const userType = new GraphQLObjectType({
     name:'userType',
     fields:()=>({
         userId:{type:GraphQLID},
         username:{type:GraphQLString},
         todos:{
             type:new GraphQLList(todoType),
-            resolve:(parent, args)=>{
-                let todos = todoModel.find({userId:parent.userId});
-                return todos
+            resolve(parent, args){
+                return todoModel.find({userId:parent.userId})
             }
 
         }
@@ -39,6 +38,15 @@ const userType= new GraphQLObjectType({
 const rootQuery = new GraphQLObjectType({
     name:'rootQuery',
     fields:{
+        user:{
+            type:userType,
+            args:{
+                userId:{type:GraphQLID}
+            },
+            resolve(parent, args){
+                return userModel.findById(args.userId)
+            }
+        },
         todo:{
             type:todoType,
             args:{
@@ -47,15 +55,6 @@ const rootQuery = new GraphQLObjectType({
             resolve(parent, args){
                 let todos = todoModel.findById(args.id);
                 return todos
-            }
-        },
-        user:{
-            type:userType,
-            args:{
-                userId:GraphQLID
-            },
-            resolve(parent, args){
-                return userModel.findById(args.userId)
             }
         },
         users:{

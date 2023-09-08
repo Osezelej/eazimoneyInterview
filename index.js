@@ -7,7 +7,7 @@ import userModel from "./model/user.js";
 const app1 = express()
 
 // mongoose connection to mongodb database
-mongoose.connect("mongodb+srv://osezelejoseph:5GvQFZDBg4ZZ7XYH@cluster0.7uwgrbb.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect("your mongodb uri")
 mongoose.connection.once('open', ()=>{
     console.log('connection to the database ready')
 })

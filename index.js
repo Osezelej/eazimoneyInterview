@@ -7,7 +7,7 @@ import userModel from "./model/user.js";
 const app1 = express()
 
 // mongoose connection to mongodb database
-mongoose.connect('mongodb://atlas-sql-64649c328de8402cb1dfe594-ni51f.a.query.mongodb.net/Agric_Fresh?ssl=true&authSource=admin')
+mongoose.connect("mongodb+srv://osezelejoseph:5GvQFZDBg4ZZ7XYH@cluster0.7uwgrbb.mongodb.net/?retryWrites=true&w=majority")
 mongoose.connection.once('open', ()=>{
     console.log('connection to the database ready')
 })
@@ -26,7 +26,7 @@ app1.post('/signup', (req, res)=>{
     ...data
    })
    newUser.save()
-   return data
+   res.send(data) 
 })
 app1.listen(4000, ()=>{
     console.log('connection to server successful')
